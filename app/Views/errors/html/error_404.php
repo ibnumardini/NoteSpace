@@ -74,6 +74,7 @@
 
         <p>
             <?php if (ENVIRONMENT !== 'production') : ?>
+                <?php /** @var string $message */ ?>
                 <?= nl2br(esc($message)) ?>
             <?php else : ?>
                 <?= lang('Errors.sorryCannotFind') ?>

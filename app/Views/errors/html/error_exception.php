@@ -2,6 +2,13 @@
 use CodeIgniter\HTTP\Header;
 use CodeIgniter\CodeIgniter;
 
+/**
+ * @var string $title
+ * @var string $message
+ * @var string $line
+ * @var string $file
+ */
+
 $errorId = uniqid('error', true);
 ?>
 <!doctype html>
