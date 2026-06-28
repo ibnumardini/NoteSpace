@@ -122,7 +122,9 @@ class Note extends BaseController
             $model->delete($id);
         }
 
-        return redirect()->to('/archived');
+        $from = str_contains(previous_url(), "/{$id}") ? '/trash' : '/archived';
+
+        return redirect()->to($from);
     }
 
     public function restore(int $id)

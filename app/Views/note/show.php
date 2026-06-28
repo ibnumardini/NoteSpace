@@ -13,6 +13,11 @@
         <?= csrf_field() ?>
         <button type="submit" class="btn-modal-cancel">Archive</button>
       </form>
+    <?php else: ?>
+      <form method="POST" action="/<?= $note['id'] ?>/trash" style="display:contents">
+        <?= csrf_field() ?>
+        <button type="submit" class="btn-modal-cancel">Move to Trash</button>
+      </form>
     <?php endif ?>
   </div>
 </div>
