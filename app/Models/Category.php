@@ -32,8 +32,16 @@ class Category extends Model
 
     protected function addSlug(array $data): array
     {
-        foreach ($data['data'] as &$row) {
-            $row['slug'] = url_title($row['name'], '-', true);
+        if (empty($data['data'])) {
+            return $data;
+        }
+
+        if ($data['singleton']) {
+            $data['data']['slug'] = url_title($data['data']['name'], '-', true);
+        } else {
+            foreach ($data['data'] as &$row) {
+                $row['slug'] = url_title($row['name'], '-', true);
+            }
         }
 
         return $data;

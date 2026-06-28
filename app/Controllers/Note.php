@@ -77,6 +77,28 @@ class Note extends BaseController
         return redirect()->to('/');
     }
 
+    public function show(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if (!$note) {
+            return redirect()->to('/');
+        }
+
+        $cat = (new CategoryModel())->find($note['category_id']);
+
+        $back = str_contains(previous_url(), '/archived') ? '/archived' : '/';
+
+        return view('note/show', [
+            'title'    => $note['title'],
+            'note'     => $note,
+            'category' => $cat,
+            'date'     => date('M j, Y', strtotime($note['updated_at'])),
+            'back'     => $back,
+        ]);
+    }
+
     public function edit(int $id)
     {
         $model = new NoteModel();

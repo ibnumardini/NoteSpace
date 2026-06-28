@@ -32,7 +32,7 @@
   <?php else: ?>
     <?php foreach ($notes as $note): ?>
       <div class="col-12 col-sm-6 col-lg-4">
-        <div class="note-card" onclick="window.location='/<?= $note['id'] ?>'" style="cursor:pointer">
+        <div class="note-card" onclick="window.location='/archived/<?= $note['id'] ?>'" style="cursor:pointer">
           <div class="note-card-header">
             <h3 class="note-card-title"><?= esc($note['title']) ?></h3>
             <div class="note-actions">
