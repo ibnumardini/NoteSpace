@@ -77,6 +77,54 @@ class Note extends BaseController
         return redirect()->to('/');
     }
 
+    public function edit(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if (!$note) {
+            return redirect()->to('/');
+        }
+
+        return view('note/edit', [
+            'title'      => 'Edit Note',
+            'note'       => $note,
+            'categories' => (new CategoryModel())->findAll(),
+        ]);
+    }
+
+    public function update(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if (!$note) {
+            return redirect()->to('/');
+        }
+
+        $rules = [
+            'title'    => 'required|max_length[255]',
+            'category' => 'required|is_natural_no_zero',
+        ];
+
+        if (!$this->validate($rules)) {
+            return view('note/edit', [
+                'title'      => 'Edit Note',
+                'note'       => $note,
+                'categories' => (new CategoryModel())->findAll(),
+                'errors'     => $this->validator->getErrors(),
+            ]);
+        }
+
+        $model->update($id, [
+            'title'       => $this->request->getPost('title'),
+            'content'     => $this->request->getPost('content'),
+            'category_id' => $this->request->getPost('category'),
+        ]);
+
+        return redirect()->to('/');
+    }
+
     public function trash()
     {
         helper('text');

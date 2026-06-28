@@ -4,6 +4,11 @@ const quill = new Quill('#quillEditor', {
     modules: { toolbar: ['bold', 'italic', 'underline', { list: 'ordered' }, { list: 'bullet' }, 'link'] }
 });
 
+const noteContent = document.getElementById('noteContent');
+if (noteContent.value) {
+    quill.root.innerHTML = noteContent.value;
+}
+
 document.querySelector('form').addEventListener('submit', () => {
-    document.getElementById('noteContent').value = quill.root.innerHTML;
+    noteContent.value = quill.root.innerHTML;
 });
