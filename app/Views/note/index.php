@@ -13,7 +13,7 @@
         <img src="/assets/svg/stat-notes.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value">4</p>
+        <p class="stat-value"><?= $stats['total'] ?></p>
         <p class="stat-label">Total Notes</p>
       </div>
     </div>
@@ -24,7 +24,7 @@
         <img src="/assets/svg/stat-tag.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value">3</p>
+        <p class="stat-value"><?= $stats['categories'] ?></p>
         <p class="stat-label">Categories</p>
       </div>
     </div>
@@ -35,7 +35,7 @@
         <img src="/assets/svg/stat-pin.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value">1</p>
+        <p class="stat-value"><?= $stats['pinned'] ?></p>
         <p class="stat-label">Pinned</p>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <img src="/assets/svg/stat-calendar.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value">1</p>
+        <p class="stat-value"><?= $stats['today'] ?></p>
         <p class="stat-label">Today</p>
       </div>
     </div>
