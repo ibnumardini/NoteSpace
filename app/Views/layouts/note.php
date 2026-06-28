@@ -9,6 +9,7 @@
 </head>
 <body class="dashboard-page">
 
+  <?php helper('nav') ?>
   <?= $this->include('partials/navbar') ?>
 
   <main class="dashboard-main">

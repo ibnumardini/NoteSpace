@@ -9,9 +9,9 @@
     </a>
 
     <div class="d-none d-md-flex align-items-center gap-1">
-      <a href="<?= site_url() ?>" class="nav-link-app <?= current_url() === site_url('/') ? 'active' : '' ?>">Notes</a>
-      <a href="<?= site_url() ?>/archived" class="nav-link-app <?= str_contains(current_url(), '/archived') ? 'active' : '' ?>">Archived</a>
-      <a href="<?= site_url() ?>/trash" class="nav-link-app <?= str_contains(current_url(), '/trash') ? 'active' : '' ?>">Trash</a>
+      <a href="<?= site_url() ?>" class="nav-link-app <?= is_active('/') ? 'active' : '' ?>">Notes</a>
+      <a href="<?= site_url() ?>/archived" class="nav-link-app <?= is_active('/archived') ? 'active' : '' ?>">Archived</a>
+      <a href="<?= site_url() ?>/trash" class="nav-link-app <?= is_active('/trash') ? 'active' : '' ?>">Trash</a>
     </div>
 
     <div class="d-flex align-items-center gap-2">
@@ -40,9 +40,9 @@
     <button type="button" class="btn-close-app" data-bs-dismiss="offcanvas" aria-label="Close">✕</button>
   </div>
   <div class="offcanvas-body d-flex flex-column gap-1 pt-3">
-    <a href="<?= site_url() ?>" class="nav-link-app <?= current_url() === site_url('/') ? 'active' : '' ?>">Notes</a>
-    <a href="<?= site_url() ?>/archived" class="nav-link-app <?= str_contains(current_url(), '/archived') ? 'active' : '' ?>">Archived</a>
-    <a href="<?= site_url() ?>/trash" class="nav-link-app <?= str_contains(current_url(), '/trash') ? 'active' : '' ?>">Trash</a>
+    <a href="<?= site_url() ?>" class="nav-link-app <?= is_active('/') ? 'active' : '' ?>">Notes</a>
+    <a href="<?= site_url() ?>/archived" class="nav-link-app <?= is_active('/archived') ? 'active' : '' ?>">Archived</a>
+    <a href="<?= site_url() ?>/trash" class="nav-link-app <?= is_active('/trash') ? 'active' : '' ?>">Trash</a>
     <hr class="offcanvas-divider" />
     <a href="<?= site_url() ?>/auth/logout" class="nav-link-app">Sign Out</a>
   </div>
