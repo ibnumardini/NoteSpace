@@ -670,7 +670,7 @@ body.dashboard-page {
 .badge-work     { background-color: rgba(45,74,0,0.12);    color: var(--color-accent-violet-deep); }
 .badge-personal { background-color: rgba(122,181,32,0.15); color: var(--color-accent-violet-mid);  }
 .badge-ideas    { background-color: rgba(194,239,78,0.35); color: #2d5200;                         }
-.badge-todo     { background-color: rgba(90,138,0,0.1);    color: var(--color-accent-violet);      }
+.badge-to-do     { background-color: rgba(90,138,0,0.1);    color: var(--color-accent-violet);      }
 .badge-research { background-color: rgba(250,127,170,0.15); color: #c0366a;                        }
 
 /* Note action buttons (card hover) */
