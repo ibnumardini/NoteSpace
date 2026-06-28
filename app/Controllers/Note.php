@@ -41,6 +41,29 @@ class Note extends BaseController
         ]);
     }
 
+    public function trash()
+    {
+        helper('text');
+        $categories = (new CategoryModel())->findAll();
+
+        $notes = (new NoteModel())
+            ->where('user_id', session()->get('user_id'))
+            ->where('deleted_at IS NOT NULL', null, false)
+            ->orderBy('deleted_at', 'DESC')
+            ->withDeleted()
+            ->findAll();
+
+        $notes = array_map(function ($note) use ($categories) {
+            $cat = array_filter($categories, fn($c) => $c['id'] === $note['category_id']);
+            $note['category'] = reset($cat) ?: null;
+            $note['snippet']  = character_limiter(strip_tags($note['content'] ?? ''), 100);
+            $note['date']     = date('M j, Y', strtotime($note['deleted_at']));
+            return $note;
+        }, $notes);
+
+        return view('note/trash', ['title' => 'Trash', 'notes' => $notes]);
+    }
+
     private function getNotes(?string $activeCategory, ?string $search, array $categories, string $status = 'active'): array
     {
         $model = new NoteModel();
