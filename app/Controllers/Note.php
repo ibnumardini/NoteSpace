@@ -41,6 +41,42 @@ class Note extends BaseController
         ]);
     }
 
+    public function create()
+    {
+        $categories = (new CategoryModel())->findAll();
+        return view('note/create', ['title' => 'New Note', 'categories' => $categories]);
+    }
+
+    public function store()
+    {
+        $rules = [
+            'title'    => 'required|max_length[255]',
+            'category' => 'required|is_natural_no_zero',
+        ];
+
+        $categories = (new CategoryModel())->findAll();
+
+        if (!$this->validate($rules)) {
+            return view('note/create', [
+                'title'      => 'New Note',
+                'categories' => $categories,
+                'errors'     => $this->validator->getErrors(),
+                'old'        => $this->request->getPost(),
+            ]);
+        }
+
+        (new NoteModel())->insert([
+            'title'       => $this->request->getPost('title'),
+            'content'     => $this->request->getPost('content'),
+            'category_id' => $this->request->getPost('category'),
+            'user_id'     => session()->get('user_id'),
+            'status'      => 'active',
+            'is_pinned'   => 0,
+        ]);
+
+        return redirect()->to('/');
+    }
+
     public function trash()
     {
         helper('text');

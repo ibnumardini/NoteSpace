@@ -6,6 +6,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Note::index', ['filter' => 'auth']);
 $routes->get('archived', 'Note::archived', ['filter' => 'auth']);
 $routes->get('trash', 'Note::trash', ['filter' => 'auth']);
+$routes->get('create', 'Note::create', ['filter' => 'auth']);
+$routes->post('create', 'Note::store', ['filter' => 'auth']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('register', 'Auth::register', ['filter' => 'guest']);
