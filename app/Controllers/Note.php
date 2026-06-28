@@ -10,7 +10,15 @@ class Note extends BaseController
 {
     public function index()
     {
-        return view('note/index', ['title' => 'My Notes', 'stats' => $this->getStats()]);
+        $categories = (new CategoryModel())->findAll();
+        $activeCategory  = $this->request->getGet('category');
+
+        return view('note/index', [
+            'title'          => 'My Notes',
+            'stats'          => $this->getStats(),
+            'categories'     => $categories,
+            'activeCategory' => $activeCategory,
+        ]);
     }
 
     private function getStats(): array

@@ -63,11 +63,12 @@
 </div>
 
 <div class="filter-chips">
-  <button type="button" class="chip active">All</button>
-  <button type="button" class="chip">Work</button>
-  <button type="button" class="chip">Personal</button>
-  <button type="button" class="chip">Ideas</button>
-  <button type="button" class="chip">To-Do</button>
+  <a href="/" class="chip <?= $activeCategory === null ? 'active' : '' ?>">All</a>
+  <?php foreach ($categories as $category): ?>
+    <a href="/?category=<?= esc($category['slug']) ?>" class="chip <?= $activeCategory === $category['slug'] ? 'active' : '' ?>">
+      <?= esc($category['name']) ?>
+    </a>
+  <?php endforeach ?>
 </div>
 
 <div class="row g-3">

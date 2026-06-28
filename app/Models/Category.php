@@ -26,4 +26,16 @@ class Category extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    protected $allowCallbacks = true;
+    protected $afterFind      = ['addSlug'];
+
+    protected function addSlug(array $data): array
+    {
+        foreach ($data['data'] as &$row) {
+            $row['slug'] = url_title($row['name'], '-', true);
+        }
+
+        return $data;
+    }
 }
