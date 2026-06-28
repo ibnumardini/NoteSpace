@@ -93,9 +93,12 @@
                   <img src="/assets/svg/archive.svg" width="14" height="14" alt="" />
                 </button>
               </form>
-              <button class="note-action-btn pin <?= $note['is_pinned'] ? 'pinned' : '' ?>" title="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?>" aria-label="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?> note">
-                <img src="/assets/svg/<?= $note['is_pinned'] ? 'pin-filled' : 'pin' ?>.svg" width="14" height="14" alt="" />
-              </button>
+              <form method="POST" action="/<?= $note['id'] ?>/pin" style="display:contents">
+                <?= csrf_field() ?>
+                <button type="submit" class="note-action-btn pin <?= $note['is_pinned'] ? 'pinned' : '' ?>" title="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?>" aria-label="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?> note">
+                  <img src="/assets/svg/<?= $note['is_pinned'] ? 'pin-filled' : 'pin' ?>.svg" width="14" height="14" alt="" />
+                </button>
+              </form>
             </div>
           </div>
           <?php if ($note['snippet']): ?>

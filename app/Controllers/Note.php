@@ -113,6 +113,18 @@ class Note extends BaseController
         return redirect()->to($from);
     }
 
+    public function pin(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->update($id, ['is_pinned' => $note['is_pinned'] ? 0 : 1]);
+        }
+
+        return redirect()->back();
+    }
+
     public function edit(int $id)
     {
         $model = new NoteModel();
