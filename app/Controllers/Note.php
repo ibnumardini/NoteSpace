@@ -113,6 +113,18 @@ class Note extends BaseController
         return redirect()->to($from);
     }
 
+    public function unarchive(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->update($id, ['status' => 'active']);
+        }
+
+        return redirect()->to('/archived');
+    }
+
     public function pin(int $id)
     {
         $model = new NoteModel();
