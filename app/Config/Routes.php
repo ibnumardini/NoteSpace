@@ -11,6 +11,7 @@ $routes->get('create', 'Note::create', ['filter' => 'auth']);
 $routes->post('create', 'Note::store', ['filter' => 'auth']);
 $routes->get('(:num)', 'Note::show/$1', ['filter' => 'auth']);
 $routes->post('(:num)/archive', 'Note::archive/$1', ['filter' => 'auth']);
+$routes->post('(:num)/trash', 'Note::moveToTrash/$1', ['filter' => 'auth']);
 $routes->post('(:num)/unarchive', 'Note::unarchive/$1', ['filter' => 'auth']);
 $routes->post('(:num)/pin', 'Note::pin/$1', ['filter' => 'auth']);
 $routes->get('(:num)/edit', 'Note::edit/$1', ['filter' => 'auth']);

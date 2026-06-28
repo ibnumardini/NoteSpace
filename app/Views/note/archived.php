@@ -42,9 +42,12 @@
                   <img src="/assets/svg/unarchive.svg" width="14" height="14" alt="" />
                 </button>
               </form>
-              <button class="note-action-btn delete" title="Delete" aria-label="Delete note">
-                <img src="/assets/svg/trash.svg" width="14" height="14" alt="" />
-              </button>
+              <form method="POST" action="/<?= $note['id'] ?>/trash" style="display:contents">
+                <?= csrf_field() ?>
+                <button type="submit" class="note-action-btn delete" title="Move to Trash" aria-label="Move to trash">
+                  <img src="/assets/svg/trash.svg" width="14" height="14" alt="" />
+                </button>
+              </form>
             </div>
           </div>
           <?php if ($note['snippet']): ?>

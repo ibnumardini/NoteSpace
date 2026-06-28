@@ -113,6 +113,18 @@ class Note extends BaseController
         return redirect()->to($from);
     }
 
+    public function moveToTrash(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->delete($id);
+        }
+
+        return redirect()->to('/archived');
+    }
+
     public function unarchive(int $id)
     {
         $model = new NoteModel();
