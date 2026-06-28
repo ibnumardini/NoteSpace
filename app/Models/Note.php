@@ -12,7 +12,7 @@ class Note extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['title', 'content', 'is_pinned', 'category_id', 'status', 'user_id'];
+    protected $allowedFields    = ['title', 'content', 'is_pinned', 'category_id', 'status', 'user_id', 'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -32,6 +32,13 @@ class Note extends Model
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    public function restore(int $id): void
+    {
+        $this->useSoftDeletes = false;
+        $this->update($id, ['deleted_at' => null]);
+        $this->useSoftDeletes = true;
+    }
 
     // Callbacks
     protected $allowCallbacks = true;

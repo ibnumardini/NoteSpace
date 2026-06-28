@@ -125,6 +125,18 @@ class Note extends BaseController
         return redirect()->to('/archived');
     }
 
+    public function restore(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->withDeleted()->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->restore($id);
+        }
+
+        return redirect()->to('/trash');
+    }
+
     public function unarchive(int $id)
     {
         $model = new NoteModel();

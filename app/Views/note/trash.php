@@ -22,9 +22,12 @@
           <div class="note-card-header">
             <h3 class="note-card-title"><?= esc($note['title']) ?></h3>
             <div class="note-actions">
-              <button class="note-action-btn edit" title="Restore" aria-label="Restore note">
-                <img src="/assets/svg/restore.svg" width="14" height="14" alt="" />
-              </button>
+              <form method="POST" action="/<?= $note['id'] ?>/restore" style="display:contents">
+                <?= csrf_field() ?>
+                <button type="submit" class="note-action-btn edit" title="Restore" aria-label="Restore note">
+                  <img src="/assets/svg/restore.svg" width="14" height="14" alt="" />
+                </button>
+              </form>
               <button class="note-action-btn delete" title="Delete permanently" aria-label="Delete permanently">
                 <img src="/assets/svg/trash.svg" width="14" height="14" alt="" />
               </button>
