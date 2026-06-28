@@ -53,6 +53,8 @@ body {
   min-height: 100vh;
 }
 
+.fs-7 { font-size: 14px; }
+
 /* ── Auth (login.html, register.html) ────────────────────── */
 body.auth-page {
   display: flex;
