@@ -13,17 +13,19 @@ class Note extends BaseController
         helper('text');
         $categories     = (new CategoryModel())->findAll();
         $activeCategory = $this->request->getGet('category');
+        $search         = $this->request->getGet('q');
 
         return view('note/index', [
             'title'          => 'My Notes',
             'stats'          => $this->getStats(),
             'categories'     => $categories,
             'activeCategory' => $activeCategory,
-            'notes'          => $this->getNotes($activeCategory, $categories),
+            'search'         => $search,
+            'notes'          => $this->getNotes($activeCategory, $search, $categories),
         ]);
     }
 
-    private function getNotes(?string $activeCategory, array $categories): array
+    private function getNotes(?string $activeCategory, ?string $search, array $categories): array
     {
         $model = new NoteModel();
         $model->where('user_id', session()->get('user_id'))
@@ -31,6 +33,13 @@ class Note extends BaseController
               ->where('deleted_at IS NULL', null, false)
               ->orderBy('is_pinned', 'DESC')
               ->orderBy('updated_at', 'DESC');
+
+        if ($search) {
+            $model->groupStart()
+                  ->like('title', $search)
+                  ->orLike('content', $search)
+                  ->groupEnd();
+        }
 
         if ($activeCategory) {
             $filtered = array_filter($categories, fn($c) => $c['slug'] === $activeCategory);

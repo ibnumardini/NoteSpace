@@ -54,12 +54,12 @@
 </div>
 
 <div class="d-flex align-items-center gap-3 mb-3 flex-wrap actions-row">
-  <form method="GET" action="/notes" class="search-wrap">
+  <form method="GET" action="/" class="search-wrap">
     <img src="/assets/svg/search.svg" class="search-icon" width="16" height="16" alt="" />
-    <input type="search" name="q" class="search-input" placeholder="Search notes…" autocomplete="off" />
+    <input type="search" name="q" class="search-input" placeholder="Search notes…" autocomplete="off" value="<?= esc($search ?? '') ?>" />
     <button type="submit" class="search-submit-btn" aria-label="Search">Search</button>
   </form>
-  <a href="/notes/create" class="btn-new-note">+ New Note</a>
+  <a href="/create" class="btn-new-note">+ New Note</a>
 </div>
 
 <div class="filter-chips">
@@ -74,17 +74,17 @@
 <div class="row g-3">
 
   <?php if (empty($notes)): ?>
-    <div class="col-12">
-      <p class="text-muted text-center py-4">No notes yet. <a href="/notes/create">Create one</a>.</p>
+    <div class="col-12 fs-7">
+      <p class="text-muted text-center py-4">No notes yet. <a href="/create">Create one</a>.</p>
     </div>
   <?php else: ?>
     <?php foreach ($notes as $note): ?>
       <div class="col-12 col-sm-6 col-lg-4">
-        <div class="note-card <?= $note['is_pinned'] ? 'note-card--pinned' : '' ?>" onclick="window.location='/notes/<?= $note['id'] ?>'" style="cursor:pointer">
+        <div class="note-card <?= $note['is_pinned'] ? 'note-card--pinned' : '' ?>" onclick="window.location='/<?= $note['id'] ?>'" style="cursor:pointer">
           <div class="note-card-header">
             <h3 class="note-card-title"><?= esc($note['title']) ?></h3>
             <div class="note-actions">
-              <a href="/notes/<?= $note['id'] ?>/edit" class="note-action-btn edit" title="Edit" aria-label="Edit note">
+              <a href="/<?= $note['id'] ?>/edit" class="note-action-btn edit" title="Edit" aria-label="Edit note">
                 <img src="/assets/svg/edit.svg" width="14" height="14" alt="" />
               </a>
               <button class="note-action-btn delete" title="Archive" aria-label="Archive note">
