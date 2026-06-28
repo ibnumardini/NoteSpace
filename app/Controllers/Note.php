@@ -99,6 +99,20 @@ class Note extends BaseController
         ]);
     }
 
+    public function archive(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->update($id, ['status' => 'archived']);
+        }
+
+        $from = str_contains(previous_url(), "/{$id}") ? '/archived' : '/';
+
+        return redirect()->to($from);
+    }
+
     public function edit(int $id)
     {
         $model = new NoteModel();

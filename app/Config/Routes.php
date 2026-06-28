@@ -10,6 +10,7 @@ $routes->get('trash', 'Note::trash', ['filter' => 'auth']);
 $routes->get('create', 'Note::create', ['filter' => 'auth']);
 $routes->post('create', 'Note::store', ['filter' => 'auth']);
 $routes->get('(:num)', 'Note::show/$1', ['filter' => 'auth']);
+$routes->post('(:num)/archive', 'Note::archive/$1', ['filter' => 'auth']);
 $routes->get('(:num)/edit', 'Note::edit/$1', ['filter' => 'auth']);
 $routes->post('(:num)/edit', 'Note::update/$1', ['filter' => 'auth']);
 

@@ -87,9 +87,12 @@
               <a href="/<?= $note['id'] ?>/edit" class="note-action-btn edit" title="Edit" aria-label="Edit note">
                 <img src="/assets/svg/edit.svg" width="14" height="14" alt="" />
               </a>
-              <button class="note-action-btn delete" title="Archive" aria-label="Archive note">
-                <img src="/assets/svg/archive.svg" width="14" height="14" alt="" />
-              </button>
+              <form method="POST" action="/<?= $note['id'] ?>/archive" style="display:contents">
+                <?= csrf_field() ?>
+                <button type="submit" class="note-action-btn delete" title="Archive" aria-label="Archive note">
+                  <img src="/assets/svg/archive.svg" width="14" height="14" alt="" />
+                </button>
+              </form>
               <button class="note-action-btn pin <?= $note['is_pinned'] ? 'pinned' : '' ?>" title="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?>" aria-label="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?> note">
                 <img src="/assets/svg/<?= $note['is_pinned'] ? 'pin-filled' : 'pin' ?>.svg" width="14" height="14" alt="" />
               </button>

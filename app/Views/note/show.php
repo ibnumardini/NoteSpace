@@ -9,11 +9,11 @@
   <div class="d-flex align-items-center gap-2">
     <?php if ($back === '/'): ?>
       <a href="/<?= $note['id'] ?>/edit?back=<?= urlencode($back) ?>" class="btn-modal-save">Edit</a>
+      <form method="POST" action="/<?= $note['id'] ?>/archive" style="display:contents">
+        <?= csrf_field() ?>
+        <button type="submit" class="btn-modal-cancel">Archive</button>
+      </form>
     <?php endif ?>
-    <form method="POST" action="/<?= $note['id'] ?>/archive" style="display:contents">
-      <?= csrf_field() ?>
-      <button type="submit" class="btn-modal-cancel">Archive</button>
-    </form>
   </div>
 </div>
 
