@@ -73,29 +73,41 @@
 
 <div class="row g-3">
 
-  <div class="col-12 col-sm-6 col-lg-4">
-    <div class="note-card note-card--pinned" onclick="window.location='/notes/1'" style="cursor:pointer">
-      <div class="note-card-header">
-        <h3 class="note-card-title">Rencana Sprint</h3>
-        <div class="note-actions">
-          <a href="/notes/1/edit" class="note-action-btn edit" title="Edit" aria-label="Edit note">
-            <img src="/assets/svg/edit.svg" width="14" height="14" alt="" />
-          </a>
-          <button class="note-action-btn delete" title="Archive" aria-label="Archive note">
-            <img src="/assets/svg/archive.svg" width="14" height="14" alt="" />
-          </button>
-          <button class="note-action-btn pin pinned" title="Unpin" aria-label="Unpin note">
-            <img src="/assets/svg/pin-filled.svg" width="14" height="14" alt="" />
-          </button>
+  <?php if (empty($notes)): ?>
+    <div class="col-12">
+      <p class="text-muted text-center py-4">No notes yet. <a href="/notes/create">Create one</a>.</p>
+    </div>
+  <?php else: ?>
+    <?php foreach ($notes as $note): ?>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="note-card <?= $note['is_pinned'] ? 'note-card--pinned' : '' ?>" onclick="window.location='/notes/<?= $note['id'] ?>'" style="cursor:pointer">
+          <div class="note-card-header">
+            <h3 class="note-card-title"><?= esc($note['title']) ?></h3>
+            <div class="note-actions">
+              <a href="/notes/<?= $note['id'] ?>/edit" class="note-action-btn edit" title="Edit" aria-label="Edit note">
+                <img src="/assets/svg/edit.svg" width="14" height="14" alt="" />
+              </a>
+              <button class="note-action-btn delete" title="Archive" aria-label="Archive note">
+                <img src="/assets/svg/archive.svg" width="14" height="14" alt="" />
+              </button>
+              <button class="note-action-btn pin <?= $note['is_pinned'] ? 'pinned' : '' ?>" title="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?>" aria-label="<?= $note['is_pinned'] ? 'Unpin' : 'Pin' ?> note">
+                <img src="/assets/svg/<?= $note['is_pinned'] ? 'pin-filled' : 'pin' ?>.svg" width="14" height="14" alt="" />
+              </button>
+            </div>
+          </div>
+          <?php if ($note['snippet']): ?>
+            <p class="note-card-snippet"><?= esc($note['snippet']) ?></p>
+          <?php endif ?>
+          <div class="note-card-footer">
+            <span class="note-date"><?= $note['date'] ?></span>
+            <?php if ($note['category']): ?>
+              <span class="badge-category badge-<?= $note['category']['slug'] ?>"><?= esc($note['category']['name']) ?></span>
+            <?php endif ?>
+          </div>
         </div>
       </div>
-      <p class="note-card-snippet">Review backlog, tentukan story points, dan finalisasi scope bersama tim.</p>
-      <div class="note-card-footer">
-        <span class="note-date">Jun 19, 2026</span>
-        <span class="badge-category badge-work">Work</span>
-      </div>
-    </div>
-  </div>
+    <?php endforeach ?>
+  <?php endif ?>
 
 </div>
 
