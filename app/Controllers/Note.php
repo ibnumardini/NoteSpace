@@ -302,10 +302,10 @@ class Note extends BaseController
         $model  = new NoteModel();
 
         return [
-            'total'      => $model->where('user_id', $userId)->where('deleted_at IS NULL', null, false)->countAllResults(),
-            'categories' => (new CategoryModel())->countAllResults(),
-            'pinned'     => $model->where('user_id', $userId)->where('is_pinned', 1)->where('deleted_at IS NULL', null, false)->countAllResults(),
-            'today'      => $model->where('user_id', $userId)->where('DATE(created_at)', date('Y-m-d'))->where('deleted_at IS NULL', null, false)->countAllResults(),
+            'total'    => $model->where('user_id', $userId)->where('status', 'active')->where('deleted_at IS NULL', null, false)->countAllResults(),
+            'archived' => $model->where('user_id', $userId)->where('status', 'archived')->where('deleted_at IS NULL', null, false)->countAllResults(),
+            'trash'    => $model->withDeleted()->where('user_id', $userId)->where('deleted_at IS NOT NULL', null, false)->countAllResults(),
+            'today'    => $model->where('user_id', $userId)->where('DATE(created_at)', date('Y-m-d'))->where('deleted_at IS NULL', null, false)->countAllResults(),
         ];
     }
 }

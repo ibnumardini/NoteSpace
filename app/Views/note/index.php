@@ -21,22 +21,22 @@
   <div class="col-6 col-lg-3">
     <div class="stat-card">
       <div class="stat-icon pink">
-        <img src="/assets/svg/stat-tag.svg" width="20" height="20" alt="" />
+        <img src="/assets/svg/stat-archive.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value"><?= $stats['categories'] ?></p>
-        <p class="stat-label">Categories</p>
+        <p class="stat-value"><?= $stats['archived'] ?></p>
+        <p class="stat-label">Archived</p>
       </div>
     </div>
   </div>
   <div class="col-6 col-lg-3">
     <div class="stat-card">
       <div class="stat-icon violet">
-        <img src="/assets/svg/stat-pin.svg" width="20" height="20" alt="" />
+        <img src="/assets/svg/stat-trash.svg" width="20" height="20" alt="" />
       </div>
       <div>
-        <p class="stat-value"><?= $stats['pinned'] ?></p>
-        <p class="stat-label">Pinned</p>
+        <p class="stat-value"><?= $stats['trash'] ?></p>
+        <p class="stat-label">Trash</p>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
       </div>
       <div>
         <p class="stat-value"><?= $stats['today'] ?></p>
-        <p class="stat-label">Today</p>
+        <p class="stat-label">Notes Today</p>
       </div>
     </div>
   </div>
