@@ -8,11 +8,11 @@ $routes->get('archived', 'Note::archived', ['filter' => 'auth']);
 $routes->get('trash', 'Note::trash', ['filter' => 'auth']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
-    $routes->get('register', 'Auth::register');
-    $routes->post('register', 'Auth::registerPost');
+    $routes->get('register', 'Auth::register', ['filter' => 'guest']);
+    $routes->post('register', 'Auth::registerPost', ['filter' => 'guest']);
 
-    $routes->get('login', 'Auth::login');
-    $routes->post('login', 'Auth::loginPost');
+    $routes->get('login', 'Auth::login', ['filter' => 'guest']);
+    $routes->post('login', 'Auth::loginPost', ['filter' => 'guest']);
 
-    $routes->get('logout', 'Auth::logout');
+    $routes->get('logout', 'Auth::logout', ['filter' => 'auth']);
 });
