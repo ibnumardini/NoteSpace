@@ -176,7 +176,8 @@ class Note extends BaseController
         $notes = array_map(function ($note) use ($categories) {
             $cat = array_filter($categories, fn($c) => $c['id'] === $note['category_id']);
             $note['category'] = reset($cat) ?: null;
-            $note['snippet']  = character_limiter(strip_tags($note['content'] ?? ''), 100);
+            $plain = html_entity_decode(strip_tags($note['content'] ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $note['snippet'] = mb_strlen($plain) > 100 ? mb_substr($plain, 0, 100) . '...' : $plain;
             $note['date']     = date('M j, Y', strtotime($note['deleted_at']));
             return $note;
         }, $notes);
@@ -211,7 +212,8 @@ class Note extends BaseController
         return array_map(function ($note) use ($categories) {
             $cat = array_filter($categories, fn($c) => $c['id'] === $note['category_id']);
             $note['category'] = reset($cat) ?: null;
-            $note['snippet']  = character_limiter(strip_tags($note['content'] ?? ''), 100);
+            $plain = html_entity_decode(strip_tags($note['content'] ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $note['snippet'] = mb_strlen($plain) > 100 ? mb_substr($plain, 0, 100) . '...' : $plain;
             $note['date']     = date('M j, Y', strtotime($note['updated_at']));
             return $note;
         }, $model->findAll());
