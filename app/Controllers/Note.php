@@ -291,6 +291,7 @@ class Note extends BaseController
             $note['category'] = reset($cat) ?: null;
             $plain = html_entity_decode(strip_tags($note['content'] ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $note['snippet'] = mb_strlen($plain) > 100 ? mb_substr($plain, 0, 100) . '...' : $plain;
+            $note['title']   = mb_strlen($note['title']) > 45 ? mb_substr($note['title'], 0, 45) . '...' : $note['title'];
             $note['date']     = date('M j, Y', strtotime($note['updated_at']));
             return $note;
         }, $model->findAll());
