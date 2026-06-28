@@ -137,6 +137,35 @@ class Note extends BaseController
         return redirect()->to('/trash');
     }
 
+    public function destroy(int $id)
+    {
+        $model = new NoteModel();
+        $note  = $model->withDeleted()->where('user_id', session()->get('user_id'))->find($id);
+
+        if ($note) {
+            $model->delete($id, true);
+        }
+
+        return redirect()->to('/trash');
+    }
+
+    public function emptyTrash()
+    {
+        $userId = session()->get('user_id');
+        $model  = new NoteModel();
+
+        $ids = array_column(
+            $model->withDeleted()->where('user_id', $userId)->where('deleted_at IS NOT NULL', null, false)->findAll(),
+            'id'
+        );
+
+        if ($ids) {
+            $model->delete($ids, true);
+        }
+
+        return redirect()->to('/trash');
+    }
+
     public function unarchive(int $id)
     {
         $model = new NoteModel();

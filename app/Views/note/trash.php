@@ -14,7 +14,10 @@
     </div>
   <?php else: ?>
     <div class="col-12 d-flex justify-content-end mb-1">
-      <button class="btn-new-note">Delete All</button>
+      <form method="POST" action="/trash/empty">
+        <?= csrf_field() ?>
+        <button type="submit" class="btn-new-note">Delete All</button>
+      </form>
     </div>
     <?php foreach ($notes as $note): ?>
       <div class="col-12 col-sm-6 col-lg-4">
@@ -28,9 +31,12 @@
                   <img src="/assets/svg/restore.svg" width="14" height="14" alt="" />
                 </button>
               </form>
-              <button class="note-action-btn delete" title="Delete permanently" aria-label="Delete permanently">
-                <img src="/assets/svg/trash.svg" width="14" height="14" alt="" />
-              </button>
+              <form method="POST" action="/<?= $note['id'] ?>/delete" style="display:contents">
+                <?= csrf_field() ?>
+                <button type="submit" class="note-action-btn delete" title="Delete permanently" aria-label="Delete permanently">
+                  <img src="/assets/svg/trash.svg" width="14" height="14" alt="" />
+                </button>
+              </form>
             </div>
           </div>
           <?php if ($note['snippet']): ?>
