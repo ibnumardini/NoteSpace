@@ -25,20 +25,36 @@ class Note extends BaseController
         ]);
     }
 
-    private function getNotes(?string $activeCategory, ?string $search, array $categories): array
+    public function archived()
+    {
+        helper('text');
+        $categories     = (new CategoryModel())->findAll();
+        $activeCategory = $this->request->getGet('category');
+        $search         = $this->request->getGet('q');
+
+        return view('note/archived', [
+            'title'          => 'Archived',
+            'categories'     => $categories,
+            'activeCategory' => $activeCategory,
+            'search'         => $search,
+            'notes'          => $this->getNotes($activeCategory, $search, $categories, 'archived'),
+        ]);
+    }
+
+    private function getNotes(?string $activeCategory, ?string $search, array $categories, string $status = 'active'): array
     {
         $model = new NoteModel();
         $model->where('user_id', session()->get('user_id'))
-              ->where('status', 'active')
-              ->where('deleted_at IS NULL', null, false)
-              ->orderBy('is_pinned', 'DESC')
-              ->orderBy('updated_at', 'DESC');
+            ->where('status', $status)
+            ->where('deleted_at IS NULL', null, false)
+            ->orderBy('is_pinned', 'DESC')
+            ->orderBy('updated_at', 'DESC');
 
         if ($search) {
             $model->groupStart()
-                  ->like('title', $search)
-                  ->orLike('content', $search)
-                  ->groupEnd();
+                ->like('title', $search)
+                ->orLike('content', $search)
+                ->groupEnd();
         }
 
         if ($activeCategory) {

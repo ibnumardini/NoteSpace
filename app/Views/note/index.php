@@ -111,10 +111,4 @@
 
 </div>
 
-<script>
-  document.querySelectorAll('.note-actions').forEach(el => {
-    el.addEventListener('click', e => e.stopPropagation());
-  });
-</script>
-
 <?= $this->endSection() ?>

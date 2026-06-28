@@ -4,6 +4,7 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 $routes->get('/', 'Note::index', ['filter' => 'auth']);
+$routes->get('archived', 'Note::archived', ['filter' => 'auth']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('register', 'Auth::register');
