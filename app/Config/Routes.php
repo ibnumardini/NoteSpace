@@ -3,7 +3,7 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes->get('/', 'Dashboard::index');
+$routes->get('/', 'Note::index', ['filter' => 'auth']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('register', 'Auth::register');

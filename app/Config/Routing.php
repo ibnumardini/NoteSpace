@@ -46,9 +46,9 @@ class Routing extends BaseRouting
      * The default controller to use when no other controller has been
      * specified.
      *
-     * Default: 'Dashboard'
+     * Default: 'Note'
      */
-    public string $defaultController = 'Dashboard';
+    public string $defaultController = 'Note';
 
     /**
      * For Defined Routes and Auto Routing.
