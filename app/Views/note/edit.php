@@ -36,7 +36,6 @@
   <div class="mb-3">
     <label for="noteCategory" class="form-label">Category</label>
     <select id="noteCategory" name="category" class="form-select">
-      <option value="">No category</option>
       <?php foreach ($categories as $category): ?>
         <option value="<?= $category['id'] ?>" <?= $note['category_id'] == $category['id'] ? 'selected' : '' ?>>
           <?= esc($category['name']) ?>
