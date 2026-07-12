@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-RUN docker-php-ext-install mysqli && a2enmod rewrite
+RUN docker-php-ext-install mysqli intl && a2enmod rewrite
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
