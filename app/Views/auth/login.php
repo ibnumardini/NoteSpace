@@ -42,6 +42,13 @@
 
 </form>
 
+<div class="auth-divider"><span>or</span></div>
+
+<a href="/auth/google" class="btn-google">
+  <img src="/assets/svg/google.svg" width="18" height="18" alt="" />
+  Sign in with Google
+</a>
+
 <p class="auth-footer-text">
   No account? <a href="/auth/register" class="auth-link">Sign Up</a>
 </p>

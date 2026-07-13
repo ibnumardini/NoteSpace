@@ -27,5 +27,8 @@ $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('login', 'Auth::login', ['filter' => 'guest']);
     $routes->post('login', 'Auth::loginPost', ['filter' => 'guest']);
 
+    $routes->get('google', 'Auth::googleLogin', ['filter' => 'guest']);
+    $routes->get('google/callback', 'Auth::googleCallback', ['filter' => 'guest']);
+
     $routes->get('logout', 'Auth::logout', ['filter' => 'auth']);
 });

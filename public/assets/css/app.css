@@ -229,6 +229,46 @@ body.auth-page {
 .btn-primary-app:hover  { opacity: 0.88; }
 .btn-primary-app:active { transform: scale(0.99); opacity: 0.82; }
 
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-hairline);
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--color-hairline-cool);
+  border-radius: var(--rounded-md);
+  background-color: var(--color-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.btn-google:hover {
+  background-color: var(--color-canvas-subtle);
+  border-color: var(--color-hairline);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
 /* ── Navbar (all pages) ──────────────────────────────────── */
 body.dashboard-page {
   display: flex;
